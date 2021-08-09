@@ -57,41 +57,8 @@ charm .
 
 En el siguiente diagrama podemos ver los distintos componentes con los que vamos a interactuar en la siguiente sección.  
 
+![streaming](../../../images/streaming.png)
 
-```mermaid
-graph LR
-	subgraph K[Kafka]
-		TS(Stocks):::exercise
-		TF(Topic foo)
-		TB(Topic bar)
-	end
-	subgraph P[Producers]
-		PS(fake_stock_price_generator.py):::exercise
-		P1(Producer 1)
-		PO(Producer ...)
-		PN(Producer N)
-		
-	end
-	subgraph C[Consumers]
-		SSS(etl_stream.py):::exercise
-		KCC(Console Consumer):::exercise
-    KC(Kafkacat):::exercise
-		OC(Other Process)
-	end
-	
-	%% Producers
-	PS -.-> TS
-	P1 & PO --> TF
-	PN --> TB
-	%% Consumers
-	TS -.-> SSS & KCC & KC
-	TB --> OC
-	SSS -.-> PG[(workshop)]:::exercise
-  PG -.-> SS(Superset):::exercise
-  
-
-classDef exercise stroke-dasharray: 5 5
-```
 
 ### Comenzar fake generator
 Lo primero que haremos sera generar una serie de eventos fake que estaremos publicando en Kafka.
